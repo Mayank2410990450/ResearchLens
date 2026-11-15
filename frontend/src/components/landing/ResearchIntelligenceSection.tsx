@@ -198,8 +198,8 @@ export function ResearchIntelligenceSection() {
                     <Badge variant="violet" size="sm">
                       {selectedNode.category}
                     </Badge>
-                    <span className="text-xs font-mono text-cyan-400">
-                      {selectedNode.citations.toLocaleString()} Citations
+                    <span className="text-xs font-mono text-cyan-400" suppressHydrationWarning>
+                      {new Intl.NumberFormat('en-US').format(selectedNode.citations)} Citations
                     </span>
                   </div>
 
