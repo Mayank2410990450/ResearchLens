@@ -238,6 +238,42 @@ export default function LibraryPage() {
       {/* Grid View */}
       {viewMode === 'grid' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPapers.length === 0 && (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 gap-5 text-center">
+              {/* Illustrated empty state */}
+              <div className="relative w-24 h-24">
+                <div className="absolute inset-0 rounded-3xl bg-violet-500/10 dark:bg-violet-500/15 flex items-center justify-center">
+                  <BookOpen className="w-10 h-10 text-violet-400" aria-hidden="true" />
+                </div>
+                <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+                  <UploadCloud className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-1">
+                  {searchQuery || selectedYear !== 'all' || selectedVenue !== 'all'
+                    ? 'No papers match your filters'
+                    : 'Your research library is empty'}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
+                  {searchQuery || selectedYear !== 'all' || selectedVenue !== 'all'
+                    ? 'Try adjusting your search query or clearing filters to see all papers.'
+                    : 'Upload your first PDF to start building your research collection and unlock AI-powered analysis.'}
+                </p>
+              </div>
+              {papers.length === 0 && (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setIsUploadModalOpen(true)}
+                  className="shadow-glow gap-2"
+                >
+                  <UploadCloud className="w-4 h-4" aria-hidden="true" />
+                  Upload Your First Paper
+                </Button>
+              )}
+            </div>
+          )}
           {filteredPapers.map((paper) => {
             const isSelected = selectedPaperIds.includes(paper.id);
             return (

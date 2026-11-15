@@ -12,19 +12,28 @@ export default function WorkspaceLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [mobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
+
   return (
     <WorkspaceProvider>
       <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100">
-        {/* Left Collapsible Sidebar */}
-        <Sidebar />
+        {/* Collapsible Sidebar (desktop) + Mobile drawer */}
+        <Sidebar
+          mobileOpen={mobileSidebarOpen}
+          onMobileClose={() => setMobileSidebarOpen(false)}
+        />
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           {/* Top Sticky Navigation */}
-          <TopNav />
+          <TopNav onMobileMenuToggle={() => setMobileSidebarOpen((v) => !v)} />
 
           {/* Dynamic Scrollable Page Content */}
-          <main className="flex-1 overflow-y-auto p-6 sm:p-8 bg-grid-pattern">
+          <main
+            id="main-content"
+            className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-grid-pattern"
+            tabIndex={-1}
+          >
             {children}
           </main>
         </div>

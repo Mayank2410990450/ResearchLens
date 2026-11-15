@@ -6,16 +6,15 @@ import {
   Bell,
   UploadCloud,
   ChevronDown,
-  Sparkles,
   Command,
   CheckCircle2,
-  BookOpen,
+  Menu,
 } from 'lucide-react';
 import { useWorkspace } from '@/lib/workspaceStore';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 
-export function TopNav() {
+export function TopNav({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void }) {
   const {
     activeProjectTitle,
     setActiveProjectTitle,
@@ -34,7 +33,17 @@ export function TopNav() {
   ];
 
   return (
-    <header className="h-16 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-navy-950/70 backdrop-blur-xl px-6 flex items-center justify-between sticky top-0 z-20">
+    <header className="h-16 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-navy-950/70 backdrop-blur-xl px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20" role="banner">
+      {/* Mobile hamburger */}
+      <button
+        onClick={onMobileMenuToggle}
+        className="lg:hidden p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors mr-2 flex-shrink-0"
+        aria-label="Open navigation menu"
+        aria-expanded={false}
+      >
+        <Menu className="w-5 h-5" aria-hidden="true" />
+      </button>
+
       {/* Left: Project Selector */}
       <div className="relative">
         <button
