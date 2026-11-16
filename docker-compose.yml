@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector extension
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: researchlens-db
+    restart: always
+    environment:
+      POSTGRES_USER: researchlens
+      POSTGRES_PASSWORD: researchlens_secure_password_2026
+      POSTGRES_DB: researchlens
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U researchlens -d researchlens"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: researchlens-backend
+    restart: always
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+psycopg2://researchlens:researchlens_secure_password_2026@db:5432/researchlens
+      JWT_SECRET: production-secret-key-change-me-in-prod-researchlens-2026
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend/storage:/app/storage
+
+  # Next.js Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: researchlens-frontend
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

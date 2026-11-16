@@ -19,6 +19,7 @@ import { Badge } from '@/components/ui/Badge';
 import { useWorkspace } from '@/lib/workspaceStore';
 import { useToast } from '@/components/ui/Toast';
 import { ResearchPaper } from '@/lib/types';
+import { api } from '@/lib/api';
 
 export function UploadModal() {
   const { isUploadModalOpen, setIsUploadModalOpen, addPaper } = useWorkspace();
@@ -94,12 +95,22 @@ export function UploadModal() {
           setProgressPct(100);
 
           // Step 4: Finalize & Add to state
-          setTimeout(() => {
+          setTimeout(async () => {
             const paperTitle = selectedFile.name
               .replace('.pdf', '')
               .replace(/_/g, ' ')
               .replace(/-/g, ' ')
               .replace(/\b\w/g, (l) => l.toUpperCase());
+
+            try {
+              // Attempt real backend upload
+              const backendUpload = await api.uploadPaper('proj-transformers', selectedFile);
+              if (backendUpload && backendUpload.paper_id) {
+                console.log('Backend upload successful:', backendUpload);
+              }
+            } catch (err) {
+              console.warn('Backend upload offline or unauthenticated, falling back to local workspace store:', err);
+            }
 
             const newPaper: ResearchPaper = {
               id: `paper-upload-${Date.now()}`,
