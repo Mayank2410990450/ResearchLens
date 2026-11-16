@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a14"/>
+      <stop offset="50%" stop-color="#0b1325"/>
+      <stop offset="100%" stop-color="#060912"/>
+    </linearGradient>
+
+    <!-- Node Gradient Cards -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111a2e"/>
+      <stop offset="100%" stop-color="#0a101d"/>
+    </linearGradient>
+
+    <!-- Step Accent Badges -->
+    <linearGradient id="step1Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <linearGradient id="step2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <linearGradient id="step3Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <linearGradient id="step4Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <linearGradient id="step5Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .font-code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .step-number { font-size: 11px; font-weight: 800; fill: #ffffff; letter-spacing: 1px; }
+    .step-title { font-size: 14px; font-weight: 700; fill: #f8fafc; }
+    .step-body { font-size: 11.5px; fill: #94a3b8; line-height: 1.45; }
+    .tag-text { font-size: 10px; font-weight: 600; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1200" height="480" rx="16" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="1199" height="479" rx="15.5" fill="none" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Header -->
+  <g transform="translate(60, 40)">
+    <text x="0" y="0" class="font-sans" font-size="22px" font-weight="700" fill="#f8fafc">Grounded Scientific RAG Architecture</text>
+    <text x="0" y="22" class="font-sans" font-size="12px" fill="#64748b">Five-Stage Verifiable Pipeline from Raw PDF Extraction to Coordinate-Anchored Inquiries</text>
+  </g>
+
+  <!-- Top-Right Formula Box -->
+  <g transform="translate(780, 26)">
+    <rect x="0" y="0" width="360" height="34" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="180" y="21" text-anchor="middle" class="font-code" font-size="11.5px" fill="#38bdf8">
+      Score = α · Cosine(q, d) + (1-α) · BM25(q, d)
+    </text>
+  </g>
+
+  <!-- PIPELINE 5 STAGE CARDS (X positions: 60, 285, 510, 735, 960 | Width: 205 | Spacing: 20) -->
+
+  <!-- STAGE 1: INGESTION -->
+  <g transform="translate(60, 95)">
+    <rect x="0" y="0" width="205" height="340" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.2"/>
+    <!-- Stage Pill -->
+    <rect x="16" y="18" width="70" height="20" rx="4" fill="url(#step1Grad)"/>
+    <text x="51" y="32" text-anchor="middle" class="font-sans step-number">STAGE 1</text>
+    
+    <text x="16" y="64" class="font-sans step-title">PDF Ingestion &amp;</text>
+    <text x="16" y="82" class="font-sans step-title">PyMuPDF Parse</text>
+
+    <!-- Graphic / Icon Box -->
+    <rect x="16" y="98" width="173" height="60" rx="6" fill="#131e33" stroke="#1e293b" stroke-width="1"/>
+    <text x="28" y="122" class="font-code" font-size="11px" fill="#38bdf8">fitz.open(stream)</text>
+    <text x="28" y="142" class="font-code" font-size="10px" fill="#64748b">get_text("blocks")</text>
+
+    <!-- Details -->
+    <text x="16" y="182" class="font-sans step-body">• SHA-256 deduplication</text>
+    <text x="16" y="202" class="font-sans step-body">• Page-by-page text layout</text>
+    <text x="16" y="222" class="font-sans step-body">• Coordinate bounding box</text>
+    <text x="16" y="242" class="font-sans step-body">• Embedded table extraction</text>
+
+    <!-- Output Tag -->
+    <rect x="16" y="294" width="173" height="26" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="102" y="311" text-anchor="middle" class="font-sans tag-text" fill="#38bdf8">Output: Page Blocks + BBox</text>
+  </g>
+
+  <!-- STAGE 2: CHUNKING -->
+  <g transform="translate(285, 95)">
+    <rect x="0" y="0" width="205" height="340" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.2"/>
+    <!-- Stage Pill -->
+    <rect x="16" y="18" width="70" height="20" rx="4" fill="url(#step2Grad)"/>
+    <text x="51" y="32" text-anchor="middle" class="font-sans step-number">STAGE 2</text>
+    
+    <text x="16" y="64" class="font-sans step-title">Context-Aware</text>
+    <text x="16" y="82" class="font-sans step-title">Chunking</text>
+
+    <!-- Graphic / Icon Box -->
+    <rect x="16" y="98" width="173" height="60" rx="6" fill="#13271c" stroke="#1e293b" stroke-width="1"/>
+    <text x="28" y="122" class="font-code" font-size="11px" fill="#10b981">Window: 500 tokens</text>
+    <text x="28" y="142" class="font-code" font-size="10px" fill="#64748b">Overlap: 100 tokens</text>
+
+    <!-- Details -->
+    <text x="16" y="182" class="font-sans step-body">• Preserves page number</text>
+    <text x="16" y="202" class="font-sans step-body">• Section title metadata</text>
+    <text x="16" y="222" class="font-sans step-body">• Formula block protection</text>
+    <text x="16" y="242" class="font-sans step-body">• Prompt injection sanitize</text>
+
+    <!-- Output Tag -->
+    <rect x="16" y="294" width="173" height="26" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+    <text x="102" y="311" text-anchor="middle" class="font-sans tag-text" fill="#10b981">Output: Page-Tagged Chunks</text>
+  </g>
+
+  <!-- STAGE 3: DUAL EMBEDDING -->
+  <g transform="translate(510, 95)">
+    <rect x="0" y="0" width="205" height="340" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.2"/>
+    <!-- Stage Pill -->
+    <rect x="16" y="18" width="70" height="20" rx="4" fill="url(#step3Grad)"/>
+    <text x="51" y="32" text-anchor="middle" class="font-sans step-number">STAGE 3</text>
+    
+    <text x="16" y="64" class="font-sans step-title">Dual Embedding</text>
+    <text x="16" y="82" class="font-sans step-title">&amp; Indexing</text>
+
+    <!-- Graphic / Icon Box -->
+    <rect x="16" y="98" width="173" height="60" rx="6" fill="#1e1b4b" stroke="#1e293b" stroke-width="1"/>
+    <text x="28" y="122" class="font-code" font-size="11px" fill="#818cf8">Dense: 384-d Vector</text>
+    <text x="28" y="142" class="font-code" font-size="10px" fill="#64748b">Sparse: Inverted BM25</text>
+
+    <!-- Details -->
+    <text x="16" y="182" class="font-sans step-body">• pgvector HNSW Index</text>
+    <text x="16" y="202" class="font-sans step-body">• L2 &amp; Cosine distance</text>
+    <text x="16" y="222" class="font-sans step-body">• Lexical inverted index</text>
+    <text x="16" y="242" class="font-sans step-body">• Sub-second sync time</text>
+
+    <!-- Output Tag -->
+    <rect x="16" y="294" width="173" height="26" rx="4" fill="#0f172a" stroke="#818cf8" stroke-width="1"/>
+    <text x="102" y="311" text-anchor="middle" class="font-sans tag-text" fill="#818cf8">Output: HNSW + BM25</text>
+  </g>
+
+  <!-- STAGE 4: HYBRID RETRIEVAL -->
+  <g transform="translate(735, 95)">
+    <rect x="0" y="0" width="205" height="340" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.2"/>
+    <!-- Stage Pill -->
+    <rect x="16" y="18" width="70" height="20" rx="4" fill="url(#step4Grad)"/>
+    <text x="51" y="32" text-anchor="middle" class="font-sans step-number">STAGE 4</text>
+    
+    <text x="16" y="64" class="font-sans step-title">Hybrid Search &amp;</text>
+    <text x="16" y="82" class="font-sans step-title">Re-ranking</text>
+
+    <!-- Graphic / Icon Box -->
+    <rect x="16" y="98" width="173" height="60" rx="6" fill="#2e1065" stroke="#1e293b" stroke-width="1"/>
+    <text x="28" y="122" class="font-code" font-size="11px" fill="#c084fc">Cosine + BM25 Fusion</text>
+    <text x="28" y="142" class="font-code" font-size="10px" fill="#64748b">Alpha = 0.7 (Tunable)</text>
+
+    <!-- Details -->
+    <text x="16" y="182" class="font-sans step-body">• Semantic recall (concepts)</text>
+    <text x="16" y="202" class="font-sans step-body">• Lexical precision (formulas)</text>
+    <text x="16" y="222" class="font-sans step-body">• Reciprocal Rank Fusion</text>
+    <text x="16" y="242" class="font-sans step-body">• Top-K candidate prune</text>
+
+    <!-- Output Tag -->
+    <rect x="16" y="294" width="173" height="26" rx="4" fill="#0f172a" stroke="#c084fc" stroke-width="1"/>
+    <text x="102" y="311" text-anchor="middle" class="font-sans tag-text" fill="#c084fc">Output: Top Grounded Hits</text>
+  </g>
+
+  <!-- STAGE 5: GROUNDED SYNTHESIS & VERIFICATION -->
+  <g transform="translate(960, 95)">
+    <rect x="0" y="0" width="205" height="340" rx="12" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.2"/>
+    <!-- Stage Pill -->
+    <rect x="16" y="18" width="70" height="20" rx="4" fill="url(#step5Grad)"/>
+    <text x="51" y="32" text-anchor="middle" class="font-sans step-number">STAGE 5</text>
+    
+    <text x="16" y="64" class="font-sans step-title">Grounded Synthesis</text>
+    <text x="16" y="82" class="font-sans step-title">&amp; Citation Jump</text>
+
+    <!-- Graphic / Icon Box -->
+    <rect x="16" y="98" width="173" height="60" rx="6" fill="#3b1e06" stroke="#1e293b" stroke-width="1"/>
+    <text x="28" y="122" class="font-code" font-size="11px" fill="#f59e0b">Grounded Quotes</text>
+    <text x="28" y="142" class="font-code" font-size="10px" fill="#64748b">Click-to-Page Bounding</text>
+
+    <!-- Details -->
+    <text x="16" y="182" class="font-sans step-body">• Exact quote verification</text>
+    <text x="16" y="202" class="font-sans step-body">• Page &amp; Section reference</text>
+    <text x="16" y="222" class="font-sans step-body">• Zero-Hallucination rule</text>
+    <text x="16" y="242" class="font-sans step-body">• Real-time UI highlight</text>
+
+    <!-- Output Tag -->
+    <rect x="16" y="294" width="173" height="26" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="102" y="311" text-anchor="middle" class="font-sans tag-text" fill="#f59e0b">Output: Verified Citation</text>
+  </g>
+
+  <!-- Connective Arrows Between Cards -->
+  <g stroke="#334155" stroke-width="2" fill="none">
+    <path d="M 268 260 L 282 260" marker-end="url(#arrow)"/>
+    <path d="M 493 260 L 507 260" marker-end="url(#arrow)"/>
+    <path d="M 718 260 L 732 260" marker-end="url(#arrow)"/>
+    <path d="M 943 260 L 957 260" marker-end="url(#arrow)"/>
+  </g>
+</svg>

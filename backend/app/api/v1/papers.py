@@ -26,7 +26,7 @@ from app.api.deps import get_current_user
 router = APIRouter(prefix="/papers", tags=["Research Papers"])
 
 @router.post("/upload", response_model=PaperUploadResponse, status_code=status.HTTP_202_ACCEPTED)
-async def upload_paper(
+def upload_paper(
     project_id: str = Form(...),
     file: UploadFile = File(...),
     current_user: User = Depends(get_current_user),
@@ -39,11 +39,14 @@ async def upload_paper(
     if not project:
         raise ResourceNotFoundException("ResearchProject", project_id)
 
-    content = await file.read()
+    if hasattr(file, "file") and hasattr(file.file, "read"):
+        content = file.file.read()
+    else:
+        content = file.read()
     if not content:
         raise ResearchLensException("Uploaded file is empty.", status_code=400)
 
-    storage_path, file_hash, file_size = await storage_service.save_file(
+    storage_path, file_hash, file_size = storage_service.save_file(
         file_content=content,
         file_name=file.filename or "paper.pdf",
         project_id=project_id

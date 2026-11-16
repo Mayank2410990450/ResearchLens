@@ -93,8 +93,7 @@ def test_projects_and_isolation(db):
     delete_project(project_id=proj_a.id, current_user=user_a, db=db)
     assert len(list_projects(current_user=user_a, db=db)) == 0
 
-@pytest.mark.asyncio
-async def test_full_rag_and_citation_pipeline(db):
+def test_full_rag_and_citation_pipeline(db):
     # Create User & Project
     user = User(email="researcher@mit.edu", full_name="MIT Researcher", role="researcher")
     db.add(user)
@@ -120,7 +119,7 @@ async def test_full_rag_and_citation_pipeline(db):
 
     upload_file = UploadFile(filename="attention_all_you_need.pdf", file=io.BytesIO(sample_pdf))
 
-    upload_res = await upload_paper(
+    upload_res = upload_paper(
         project_id=str(project.id),
         file=upload_file,
         current_user=user,

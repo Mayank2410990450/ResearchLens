@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c16"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+
+    <!-- Table Surface -->
+    <linearGradient id="tableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+
+    <linearGradient id="badgeGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <linearGradient id="badgeBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .font-sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .font-code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .th-text { font-size: 11.5px; font-weight: 700; fill: #cbd5e1; letter-spacing: 0.5px; }
+    .td-head { font-size: 12px; font-weight: 600; fill: #f8fafc; }
+    .td-body { font-size: 11px; fill: #94a3b8; line-height: 1.4; }
+  </style>
+
+  <!-- Shell Background -->
+  <rect width="1200" height="520" rx="16" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="1199" height="519" rx="15.5" fill="none" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Header -->
+  <g transform="translate(60, 42)">
+    <text x="0" y="0" class="font-sans" font-size="22px" font-weight="700" fill="#f8fafc">Multi-Paper Comparative Synthesis Matrix</text>
+    <text x="0" y="22" class="font-sans" font-size="12px" fill="#64748b">Automated Scientific Dimension Extraction Across Architectures, Datasets, and Benchmarks</text>
+  </g>
+
+  <!-- Export Markdown Button -->
+  <g transform="translate(980, 32)">
+    <rect x="0" y="0" width="160" height="30" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="80" y="19" text-anchor="middle" class="font-sans" font-size="11.5px" font-weight="600" fill="#38bdf8">↓ Export LaTeX / MD</text>
+  </g>
+
+  <!-- TABLE CONTAINER (Y: 90) -->
+  <g transform="translate(60, 90)">
+    <rect x="0" y="0" width="1080" height="380" rx="12" fill="url(#tableGrad)" stroke="#1e293b" stroke-width="1.2"/>
+
+    <!-- Table Header Row (Height: 46) -->
+    <rect x="0" y="0" width="1080" height="46" rx="12" fill="#1e293b" fill-opacity="0.6"/>
+    <rect x="0" y="34" width="1080" height="12" fill="#1e293b" fill-opacity="0.6"/>
+    <line x1="0" y1="46" x2="1080" y2="46" stroke="#334155" stroke-width="1"/>
+
+    <text x="24" y="28" class="font-sans th-text">DIMENSION</text>
+    <text x="220" y="28" class="font-sans th-text">ATTENTION IS ALL YOU NEED</text>
+    <text x="510" y="28" class="font-sans th-text">BERT: PRE-TRAINING ENCODERS</text>
+    <text x="800" y="28" class="font-sans th-text">ROBERTA: ROBUST APPROACH</text>
+
+    <!-- COLUMN SEPARATORS -->
+    <line x1="200" y1="0" x2="200" y2="380" stroke="#1e293b" stroke-width="1"/>
+    <line x1="490" y1="0" x2="490" y2="380" stroke="#1e293b" stroke-width="1"/>
+    <line x1="780" y1="0" x2="780" y2="380" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- ROW 1: CORE ARCHITECTURE (Y: 46 to 128) -->
+    <g transform="translate(0, 46)">
+      <line x1="0" y1="82" x2="1080" y2="82" stroke="#1e293b" stroke-width="1"/>
+      <text x="24" y="32" class="font-sans td-head">Core Architecture</text>
+      <text x="24" y="50" class="font-sans td-body">Foundational design</text>
+
+      <!-- Paper 1 -->
+      <g transform="translate(220, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#38bdf8">Encoder-Decoder Transformer</text>
+        <text x="0" y="36" class="font-sans td-body">Multi-head scaled dot-product</text>
+        <text x="0" y="52" class="font-sans td-body">self-attention; eliminates RNNs.</text>
+      </g>
+
+      <!-- Paper 2 -->
+      <g transform="translate(510, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#818cf8">Bidirectional Encoder</text>
+        <text x="0" y="36" class="font-sans td-body">Multi-layer bidirectional Transformer</text>
+        <text x="0" y="52" class="font-sans td-body">encoder; joint context conditioning.</text>
+      </g>
+
+      <!-- Paper 3 -->
+      <g transform="translate(800, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#c084fc">Optimized Bidirectional</text>
+        <text x="0" y="36" class="font-sans td-body">BERT-based architecture with dynamic</text>
+        <text x="0" y="52" class="font-sans td-body">masking and removed NSP objective.</text>
+      </g>
+    </g>
+
+    <!-- ROW 2: PRE-TRAINING OBJECTIVE (Y: 128 to 210) -->
+    <g transform="translate(0, 128)">
+      <line x1="0" y1="82" x2="1080" y2="82" stroke="#1e293b" stroke-width="1"/>
+      <text x="24" y="32" class="font-sans td-head">Pre-training Task</text>
+      <text x="24" y="50" class="font-sans td-body">Supervision loss</text>
+
+      <!-- Paper 1 -->
+      <g transform="translate(220, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#f8fafc">Seq2Seq Supervised Translation</text>
+        <text x="0" y="36" class="font-sans td-body">Teacher-forcing cross-entropy loss</text>
+        <text x="0" y="52" class="font-sans td-body">on WMT 2014 En-De / En-Fr.</text>
+      </g>
+
+      <!-- Paper 2 -->
+      <g transform="translate(510, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#f8fafc">MLM + Next Sentence (NSP)</text>
+        <text x="0" y="36" class="font-sans td-body">Masked Language Modeling (15%)</text>
+        <text x="0" y="52" class="font-sans td-body">and binary next sentence prediction.</text>
+      </g>
+
+      <!-- Paper 3 -->
+      <g transform="translate(800, 16)">
+        <text x="0" y="16" class="font-sans" font-size="12px" font-weight="600" fill="#f8fafc">Dynamic Masked LM Only</text>
+        <text x="0" y="36" class="font-sans td-body">Full-sentences without NSP; larger</text>
+        <text x="0" y="52" class="font-sans td-body">batches (8K sequences) and 160GB data.</text>
+      </g>
+    </g>
+
+    <!-- ROW 3: BENCHMARK RESULTS (Y: 210 to 292) -->
+    <g transform="translate(0, 210)">
+      <line x1="0" y1="82" x2="1080" y2="82" stroke="#1e293b" stroke-width="1"/>
+      <text x="24" y="32" class="font-sans td-head">Key Results</text>
+      <text x="24" y="50" class="font-sans td-body">Empirical performance</text>
+
+      <!-- Paper 1 -->
+      <g transform="translate(220, 16)">
+        <rect x="0" y="2" width="130" height="22" rx="4" fill="url(#badgeGreen)" stroke="#10b981" stroke-width="1"/>
+        <text x="65" y="17" text-anchor="middle" class="font-code" font-size="11px" font-weight="700" fill="#34d399">28.4 BLEU (En-De)</text>
+        <text x="0" y="44" class="font-sans td-body">Trained in 3.5 days on 8 P100 GPUs</text>
+      </g>
+
+      <!-- Paper 2 -->
+      <g transform="translate(510, 16)">
+        <rect x="0" y="2" width="130" height="22" rx="4" fill="url(#badgeBlue)" stroke="#0284c7" stroke-width="1"/>
+        <text x="65" y="17" text-anchor="middle" class="font-code" font-size="11px" font-weight="700" fill="#38bdf8">80.5 GLUE Score</text>
+        <text x="0" y="44" class="font-sans td-body">SOTA on 11 NLP tasks</text>
+      </g>
+
+      <!-- Paper 3 -->
+      <g transform="translate(800, 16)">
+        <rect x="0" y="2" width="130" height="22" rx="4" fill="url(#badgeGreen)" stroke="#10b981" stroke-width="1"/>
+        <text x="65" y="17" text-anchor="middle" class="font-code" font-size="11px" font-weight="700" fill="#34d399">88.5 GLUE Score</text>
+        <text x="0" y="44" class="font-sans td-body">Matches or exceeds XLNet on benchmarks</text>
+      </g>
+    </g>
+
+    <!-- ROW 4: DETECTED GAPS & LIMITATIONS (Y: 292 to 380) -->
+    <g transform="translate(0, 292)">
+      <text x="24" y="32" class="font-sans td-head">Identified Gaps</text>
+      <text x="24" y="50" class="font-sans td-body">Research opportunities</text>
+
+      <!-- Paper 1 -->
+      <g transform="translate(220, 16)">
+        <text x="0" y="16" class="font-sans" font-size="11.5px" fill="#fbbf24">O(N²) Quadratic Complexity</text>
+        <text x="0" y="34" class="font-sans td-body">Memory scales poorly with sequence</text>
+        <text x="0" y="50" class="font-sans td-body">length; lacks recurrence efficiency.</text>
+      </g>
+
+      <!-- Paper 2 -->
+      <g transform="translate(510, 16)">
+        <text x="0" y="16" class="font-sans" font-size="11.5px" fill="#fbbf24">Pretrain-Finetune Mismatch</text>
+        <text x="0" y="34" class="font-sans td-body">[MASK] tokens never seen during</text>
+        <text x="0" y="50" class="font-sans td-body">downstream fine-tuning inference.</text>
+      </g>
+
+      <!-- Paper 3 -->
+      <g transform="translate(800, 16)">
+        <text x="0" y="16" class="font-sans" font-size="11.5px" fill="#fbbf24">Massive Compute Footprint</text>
+        <text x="0" y="34" class="font-sans td-body">Requires 1024 V100 GPU days; prohibitive</text>
+        <text x="0" y="50" class="font-sans td-body">for academic laboratory reproduction.</text>
+      </g>
+    </g>
+  </g>
+</svg>

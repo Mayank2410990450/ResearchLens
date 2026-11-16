@@ -13,7 +13,7 @@ class StorageService:
         self.local_dir = Path(settings.LOCAL_STORAGE_DIR)
         self.local_dir.mkdir(parents=True, exist_ok=True)
 
-    async def save_file(self, file_content: bytes, file_name: str, project_id: str) -> Tuple[str, str, int]:
+    def save_file(self, file_content: bytes, file_name: str, project_id: str) -> Tuple[str, str, int]:
         """
         Validates, computes sha256 hash, and saves file to storage.
         Returns: (storage_path, file_hash, file_size_bytes)
@@ -43,8 +43,8 @@ class StorageService:
                     "Content-Type": "application/pdf",
                     "x-upsert": "true"
                 }
-                async with httpx.AsyncClient(timeout=30.0) as client:
-                    resp = await client.post(upload_url, headers=headers, content=file_content)
+                with httpx.Client(timeout=10.0) as client:
+                    resp = client.post(upload_url, headers=headers, content=file_content)
                     if resp.status_code in (200, 201):
                         logger.info(f"Successfully uploaded {file_name} to Supabase Storage: {storage_path}")
                         return (storage_path, sha256, size)
@@ -59,8 +59,8 @@ class StorageService:
         safe_filename = f"{sha256[:16]}_{file_name}"
         dest_path = project_storage / safe_filename
 
-        async with aiofiles.open(dest_path, "wb") as f:
-            await f.write(file_content)
+        with open(dest_path, "wb") as f:
+            f.write(file_content)
 
         logger.info(f"Saved file {file_name} to local storage: {dest_path}")
         return (str(dest_path), sha256, size)
