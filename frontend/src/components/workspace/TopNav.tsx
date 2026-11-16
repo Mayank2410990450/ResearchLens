@@ -25,6 +25,7 @@ export function TopNav({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
 
   const [isNotificationsOpen, setIsNotificationsOpen] = React.useState(false);
   const [isProjectDropdownOpen, setIsProjectDropdownOpen] = React.useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = React.useState(false);
 
   const projects = [
     'Efficiency in Transformer & Multimodal Architectures',
@@ -159,19 +160,61 @@ export function TopNav({ onMobileMenuToggle }: { onMobileMenuToggle?: () => void
           <span>Upload PDF</span>
         </Button>
 
-        {/* User Profile Badge */}
-        <div className="flex items-center gap-2.5 pl-2 border-l border-slate-200/80 dark:border-slate-800/80">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white font-bold text-xs shadow-sm">
-            PS
-          </div>
-          <div className="hidden lg:block text-left">
-            <span className="text-xs font-semibold text-slate-900 dark:text-white block leading-tight">
-              Dr. Priya Sharma
-            </span>
-            <span className="text-[10px] font-mono text-slate-400 block leading-none">
-              Stanford AI Lab
-            </span>
-          </div>
+        {/* User Profile Badge & Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+            className="flex items-center gap-2.5 pl-2 border-l border-slate-200/80 dark:border-slate-800/80 hover:opacity-80 transition-opacity text-left"
+          >
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-600 via-indigo-500 to-cyan-400 flex items-center justify-center text-white font-bold text-xs shadow-sm flex-shrink-0">
+              PS
+            </div>
+            <div className="hidden lg:block text-left">
+              <span className="text-xs font-semibold text-slate-900 dark:text-white block leading-tight">
+                Dr. Priya Sharma
+              </span>
+              <span className="text-[10px] font-mono text-slate-400 block leading-none">
+                Stanford AI Lab
+              </span>
+            </div>
+          </button>
+
+          {/* Profile Dropdown */}
+          {isProfileDropdownOpen && (
+            <div className="absolute top-full right-0 mt-2 w-56 p-2 rounded-2xl glass-panel-glow bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 shadow-2xl z-50 text-xs">
+              <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800">
+                <span className="font-semibold text-slate-900 dark:text-white block">Dr. Priya Sharma</span>
+                <span className="text-[11px] text-slate-400 font-mono">dr.sharma@stanford.edu</span>
+              </div>
+              <div className="space-y-1 mt-1">
+                <a
+                  href="/workspace/settings"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors block"
+                  onClick={() => setIsProfileDropdownOpen(false)}
+                >
+                  Workspace Settings
+                </a>
+                <a
+                  href="/auth"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors block"
+                  onClick={() => setIsProfileDropdownOpen(false)}
+                >
+                  Switch Account / Sign In
+                </a>
+                <button
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      localStorage.removeItem('researchlens_token');
+                      window.location.href = '/auth';
+                    }
+                  }}
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs text-red-500 hover:bg-red-500/10 transition-colors block font-medium"
+                >
+                  Log Out
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>

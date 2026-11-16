@@ -73,7 +73,7 @@ export function LandingNav() {
         {/* Action CTAs */}
         <div className="flex items-center gap-3">
           <Link
-            href="/workspace/dashboard"
+            href="/auth"
             className="hidden sm:inline-flex"
           >
             <Button variant="ghost" size="sm">
